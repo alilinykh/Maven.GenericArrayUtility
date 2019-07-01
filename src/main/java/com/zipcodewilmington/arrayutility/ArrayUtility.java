@@ -20,7 +20,8 @@ public class ArrayUtility <T> {
     }
 
     public Integer getNumberOfOccurrences(T valueToEvaluate) {
-        return null;
+        Long rslt = Arrays.stream(originalArray).filter(v -> v.equals(valueToEvaluate)).count();
+        return rslt.intValue();
     }
 
     public T getMostCommonFromMerge(T[] arrayToMerge) {

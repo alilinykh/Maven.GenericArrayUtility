@@ -1,17 +1,22 @@
 package com.zipcodewilmington.arrayutility;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 /**
  * Created by leon on 3/6/18.
  */
 public class ArrayUtility <T> {
-    T[] t;
+    T[] arrayToMerge;
+    T[] originalArray;
 
     public ArrayUtility(T[] t) {
-        this.t = t;
+        this.originalArray = t;
     }
 
     public Integer countDuplicatesInMerge(T[] arrayToMerge, T valueToEvaluate) {
-        return null;
+        Long rslt = Stream.concat(Arrays.stream(originalArray), Arrays.stream(arrayToMerge)).filter(v -> v.equals(valueToEvaluate)).count();
+        return rslt.intValue();
     }
 
     public Integer getNumberOfOccurrences(T valueToEvaluate) {

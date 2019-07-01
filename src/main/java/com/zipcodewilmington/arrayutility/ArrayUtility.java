@@ -1,6 +1,8 @@
 package com.zipcodewilmington.arrayutility;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -25,7 +27,18 @@ public class ArrayUtility <T> {
     }
 
     public T getMostCommonFromMerge(T[] arrayToMerge) {
-        return null;
+        Stream<T> stream = Stream.concat(Arrays.stream(originalArray), Arrays.stream(arrayToMerge));
+        Integer count = 0;
+        T stuff = null;
+        for (T t: (T[]) stream.toArray()
+             ) {
+            Integer rslt = getNumberOfOccurrences(t);
+            if (rslt > count) {
+                count = rslt;
+                stuff = t;
+            }
+        }
+        return stuff;
     }
 
 

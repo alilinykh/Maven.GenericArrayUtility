@@ -1,7 +1,10 @@
 package com.zipcodewilmington.arrayutility;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,20 +32,31 @@ public class ArrayUtility <T> {
     public T getMostCommonFromMerge(T[] arrayToMerge) {
         Stream<T> stream = Stream.concat(Arrays.stream(originalArray), Arrays.stream(arrayToMerge));
         Integer count = 0;
-        T stuff = null;
+        T rslt = null;
         for (T t: (T[]) stream.toArray()
              ) {
-            Integer rslt = getNumberOfOccurrences(t);
-            if (rslt > count) {
-                count = rslt;
-                stuff = t;
+            Integer numberOfOccurrences = getNumberOfOccurrences(t);
+            if (numberOfOccurrences > count) {
+                count = numberOfOccurrences;
+                rslt = t;
             }
         }
-        return stuff;
+        return rslt;
     }
 
 
     public T []removeValue(T valueToRemove) {
-        return null;
+        ArrayList<T> arrayList = new ArrayList<>();
+        for (T t: originalArray
+             ) {
+            if (!t.equals(valueToRemove)) {
+                arrayList.add(t);
+            }
+        }
+        for (int i = 0; i < arrayList.size() ; i++) {
+            originalArray[i] = arrayList.get(i);
+        }
+        originalArray = Arrays.copyOf(originalArray,arrayList.size());
+        return originalArray;
     }
 }
